@@ -13,7 +13,7 @@ def parse_args():
     logging.basicConfig(level=args.loglevel.upper(), format="%(name)s - %(message)s")
     return args
 
-def analyze_settings_file(path="./settings.set"):
+def analyze_settings_file(path=None):
     dirname, filename = os.path.split(path)
     with open(path, 'rb') as f:
         data = f.read()
@@ -34,4 +34,4 @@ def analyze_settings_file(path="./settings.set"):
 
 if __name__ == "__main__":
     args = parse_args()
-    analyze_settings_file(args.settings_file)
+    analyze_settings_file(path=args.settings_file)
