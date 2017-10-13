@@ -18,12 +18,13 @@ def query(inst, cmd):
     logger.info(" <- " + resp)
     logger.debug(f"This took {(end-start)*1000:.1f} ms.")
 
-def parse_args():
+def parse_args(callback=None):
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--loglevel', default='INFO')
     parser.add_argument('--backend')
     parser.add_argument('device')
+    if callback: callback(parser)
     args = parser.parse_args()
     logging.basicConfig(level=args.loglevel.upper(), format="%(name)s - %(message)s")
     return args
