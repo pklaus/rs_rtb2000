@@ -4,6 +4,8 @@ from helpers import get_instrument, write, query, ieee_488_2_block_data
 
 def get_screenshot(device=None, backend=None):
     inst = get_instrument(device, backend=backend)
+    if query(inst, "ACQuire:STATe?") not in ("STOP", "BRE"):
+        write(inst, "STOP")
     if query(inst, "HCOPy:LANGuage?") != "PNG":
         write(inst, "HCOPy:LANGuage PNG")
     data = inst.query_raw("HCOPy:DATA?")

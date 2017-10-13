@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 from universal_usbtmc.backend_factory import import_backend
 import logging, time
 
