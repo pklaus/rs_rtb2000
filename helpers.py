@@ -30,6 +30,15 @@ def parse_args():
     logging.basicConfig(level=args.loglevel.upper(), format="%(name)s - %(message)s")
     return args
 
+def ieee_488_2_block_data(data):
+    assert data.startswith(b'#')
+    interpret_as_int = lambda data: int(data.decode('ascii'))
+    add_header_size = interpret_as_int(data[1:2])
+    add_header = data[2:2+add_header_size]
+    length = interpret_as_int(add_header)
+    begin = 2+add_header_size
+    return data[begin:begin+length]
+
 def get_instrument(device=None, backend=None):
     if not device:
         args = parse_args()
